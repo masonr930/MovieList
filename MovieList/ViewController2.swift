@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class ViewController2: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var tableViewOutlet: UITableView!
     
@@ -47,9 +47,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell")!
-        cell.textLabel!.text = movies[indexPath.row].name
-        cell.detailTextLabel!.text = String(movies[indexPath.row].releaseDate)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell")! as! CustomCell
+        
+        cell.configure(movie: movies[indexPath.row])
+        
         return cell
     }
     
@@ -80,7 +81,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         
-        let nvc = segue.destination as! DescriptionViewController
+        let nvc = segue.destination as! DescriptionViewController2
         nvc.theMovie = selectedMovie
     }
     
